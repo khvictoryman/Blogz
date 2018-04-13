@@ -36,17 +36,13 @@
     </form>
 
     <hr />
-
-    {% if posts|length == 0 %}
-    <p>No blog posts yet</p>
-    {% else %}
-
+    
+        <p>{{posts}}</p>
         {% for post in posts %}
         <h2>{{post_title}}</h2>
         <p>{{post_body}}</p>
         <hr />
         {% endfor %}
 
-    {% endif %}
 
 {% endblock %}

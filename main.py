@@ -30,11 +30,11 @@ def index():
         db.session.commit()
 
     posts = Blog.query.all()
-    post_title = Blog.query.with_entities(Blog.title)
-    post_body = Blog.query.with_entities(Blog.body)
+    post_title = Blog.query.with_entities(Blog.title).all()
+    post_body = Blog.query.with_entities(Blog.body).all()
 
     return render_template('blog.html',title="Build-a-Blog", 
-        post_title=post_title, post_body=post_body)
+        post_title=post_title, post_body=post_body, posts=posts)
 
 if __name__ == '__main__':
     app.run()
