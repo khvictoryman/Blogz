@@ -1,48 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <style>
-        post_form {
-            background-color: #eeeeee;
-            padding: 20px;
-            margin: 0 auto;
-            width: 540px;
-            font: 16px sans-serif;
-            border-radius: 10px;
-        }
-        input[name="blog_body"] {
-            margin: 10px 0;
-            width: 540px;
-            height: 120px;
-        }
-    </style>
 
-    <h1>Build-a-Blog</h1>
-    <form method='post' name='post_form'>
-        <label>
-            <p>
-            Title for you new blog:
-            <br>
-            <input type="text" name='title' />
-            </p>
-            <br>
-            <p>
-            Your new blog:
-            <br>
-            <input type="textarea" name='body' />
-            </p>
-        </label>
-        <input type="submit" value='Add Entry' />
-    </form>
+    <div class="page_header"><h1>Build-a-Blog</h1></div>
 
     <hr />
-    
-        <p>{{posts}}</p>
+    {% if posts|length == 0 %}
+    <p>No blog posts yet</p>
+    {% else %}
         {% for post in posts %}
-        <h2>{{post_title}}</h2>
-        <p>{{post_body}}</p>
+        <h2><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
+        <p>{{post.body}}</p>
         <hr />
         {% endfor %}
-
+    {% endif %}
 
 {% endblock %}
