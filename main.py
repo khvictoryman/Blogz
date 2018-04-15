@@ -28,24 +28,31 @@ def newpost():
         blog = Blog(blog_title, blog_body)
         db.session.add(blog)
         db.session.commit()
-
+        post_id = blog.id
+        return redirect('/blog?id=' + str(post_id))
 
     return render_template('newpost.html')
 
 @app.route('/blog', methods=['GET'])
 def blog():
-    #posts = Blog.query.order_by(DESC).all()
-    posts = Blog.query.order_by(desc(Blog.id)).all()
 
-    return render_template('blog.html',title="Build-a-Blog", posts=posts)
+    post_id = request.args.get('id')
+    
+    if post_id is None:   
+        posts = Blog.query.order_by(desc(Blog.id)).all()
+
+        return render_template('blog.html',title="Build-a-Blog", posts=posts) 
+
+    else:
+        
+        post = Blog.query.get(int(post_id))
+        return render_template('blogpost.html', post=post)
+
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return redirect('/blog')
-"""         posts = Blog.query.all()
 
-        return render_template('blog.html',title="Build-a-Blog", posts=posts)
- """
 if __name__ == '__main__':
     app.run()
