@@ -2,15 +2,15 @@
 
 {% block content %}
 
-    <div class="page_header"><h1>Build-a-Blog</h1></div>
 
-    <hr />
     {% if posts|length == 0 %}
     <p>No blog posts yet</p>
     {% else %}
         {% for post in posts %}
         <h2><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
-        <p>{{post.body}}</p>
+        <p><strong>{{post.body}}{{owner_test}}</strong></p>
+
+        <p style="font-style: italic; font-size: 11px">written by <a href="/blog?user={{post.owner.username}}">{{post.owner.username}}</a></p>
         <hr />
         {% endfor %}
     {% endif %}
