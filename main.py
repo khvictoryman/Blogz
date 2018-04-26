@@ -120,7 +120,7 @@ def signup():
                 session['username'] = username
                 return redirect('/blog')
             else:
-                flash("The username <strong>{0}</strong> is already registered".format(email), 'danger')
+                flash("That username is already registered")
 
     return render_template('signup.html')
 
